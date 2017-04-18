@@ -1,0 +1,20 @@
+version: '3'
+services:
+  cakedb:
+   build: ./db/
+   ports:
+    - "3306:3306"
+   privileged: true
+   container_name: "cakedb"
+  cakeweb:
+   build: .
+   ports:
+    - "50080:80"
+   volumes:
+    - ./work:/var/www/html
+   links:
+    - cakedb
+    - cakedb:database
+   working_dir: /var/www/html
+   privileged: true
+   container_name: "cakeweb"
