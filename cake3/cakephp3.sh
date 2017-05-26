@@ -49,21 +49,3 @@ sed -ie "236 s/UTC/Asia\/Tokyo/" app.php
 
 mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u $DB_USER
 
-
-
-
-
--rw-r--r--.  1 root root   964  5月 20 15:58 README.md
-drwxr-xr-x.  2 root root    50  5月 20 15:58 bin
--rw-r--r--.  1 root root  1206  5月 20 15:58 composer.json
--rw-r--r--.  1 root root 67444  5月 20 15:58 composer.lock
-drwxr-xr-x.  3 root root   155  5月 20 16:03 config
--rw-r--r--.  1 root root   648  5月 20 15:58 index.php
-drwxr-xr-x.  2 root root    19  5月 20 15:58 logs
--rw-r--r--.  1 root root  1139  5月 20 15:58 phpunit.xml.dist
-drwxr-xr-x.  2 root root    19  5月 20 15:58 plugins
-drwxr-xr-x.  8 root root    93  5月 20 15:58 src
-drwxr-xr-x.  4 root root    58  5月 20 15:58 tests
-drwxr-xr-x.  5 root root    48  5月 20 15:58 tmp
-drwxr-xr-x. 19 root root  4096  5月 20 15:58 vendor
-drwxr-xr-x.  5 root root    91  5月 20 15:58 webroot
