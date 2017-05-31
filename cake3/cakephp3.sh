@@ -54,5 +54,5 @@ mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u $DB_USER mysql
 echo \
 "<Directory \"$DOCUMENT_ROOT/$APP_DIR\">
 	Options FollowSymLinks
-	AllowOverride
+	AllowOverride All
 </Directory>" > /etc/httpd/conf.d/${APP_DIR}.conf
