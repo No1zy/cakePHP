@@ -45,7 +45,9 @@ cp $DOCUMENT_ROOT/$APP_DIR/config/app.default.php $DOCUMENT_ROOT/$APP_DIR/config
 sed -ie "232 s/my_app/$DB_USER/" $DOCUMENT_ROOT/$APP_DIR/config/app.php
 sed -ie "233 s/secret/$DB_PASSWORD/" $DOCUMENT_ROOT/$APP_DIR/config/app.php
 sed -ie "234 s/my_app/$DB_NAME/" $DOCUMENT_ROOT/$APP_DIR/config/app.php
-sed -ie "236 s/UTC/Asia\/Tokyo/" app.php
+sed -ie "s/__SALT__/hogefugavar/" $DOCUMENT_ROOT/$APP_DIR/config/app.php
+
+sed -ie "236 s/UTC/Asia\/Tokyo/" $DOCUMENT_ROOT/$APP_DIR/config/app.php
 
 mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u $DB_USER mysql
 
