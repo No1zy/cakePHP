@@ -6,10 +6,10 @@ DB_NAME='test'
 DB_PASSWORD=''
 
 yum update -y
-yum install -y epel-release
+yum install -y epel-release zip unzip 
 rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
 yum install -y --enablerepo=remi,remi-php70 php php-devel php-mbstring php-ldap php-mysql php-pdo php-gd php-cli php-opcache php-mcrypt php-intl
-yum install -y mysql mariadb-server httpd git vim
+yum install -y mysql mariadb-server httpd git
 
 systemctl enable httpd
 systemctl enable mariadb
@@ -21,10 +21,8 @@ curl -sS https://getcomposer.org/installer | php
 mv composer.phar /usr/local/bin/composer
 mkdir $DOCUMENT_ROOT/$APP_DIR
 
-composer create-project --prefer-dist cakephp/app $DOCUMENT_ROOT/$APP_DIR <<EOS
-Y
-Y
-EOS
+echo "Y" | composer create-project --prefer-dist cakephp/app $DOCUMENT_ROOT/$APP_DIR
+
 
 firewall-cmd --add-service=http --permanent
 firewall-cmd --reload
@@ -47,7 +45,12 @@ cp $DOCUMENT_ROOT/$APP_DIR/config/app.default.php $DOCUMENT_ROOT/$APP_DIR/config
 sed -ie "232 s/my_app/$DB_USER/" $DOCUMENT_ROOT/$APP_DIR/config/app.php
 sed -ie "233 s/secret/$DB_PASSWORD/" $DOCUMENT_ROOT/$APP_DIR/config/app.php
 sed -ie "234 s/my_app/$DB_NAME/" $DOCUMENT_ROOT/$APP_DIR/config/app.php
-sed -ie "236 s/UTC/Asia\/Tokyo/" $DOCUMENT_ROOT/$APP_DIR/config/app.php
-sed -ie "s/__SALT__/hogefugavar/" $DOCUMENT_ROOT/$APP_DIR/config/app.php
-mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u $DB_USER mysql
+sed -ie "236 s/UTC/Asia\/Tokyo/" app.php
 
+mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u $DB_USER
+
+echo \
+"<Directory \"$DOCUMENT_ROOT/$APP_DIR\">
+	Options FollowSymLinks
+	AllowOverride
+</Directory>" > /etc/httpd/conf.d/${APP_DIR}.conf
