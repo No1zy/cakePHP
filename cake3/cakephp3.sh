@@ -47,7 +47,7 @@ sed -ie "233 s/secret/$DB_PASSWORD/" $DOCUMENT_ROOT/$APP_DIR/config/app.php
 sed -ie "234 s/my_app/$DB_NAME/" $DOCUMENT_ROOT/$APP_DIR/config/app.php
 sed -ie "236 s/UTC/Asia\/Tokyo/" app.php
 
-mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u $DB_USER
+mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u $DB_USER mysql
 
 echo \
 "<Directory \"$DOCUMENT_ROOT/$APP_DIR\">
